@@ -54,7 +54,7 @@ const Header = () => {
           alt="Logo"
         />
         <h3 className='text-slate-50 text-xl hover:text-blue-400 transition-transform duration-300 transform hover:scale-110'>
-          Trello Clone
+          Trello
         </h3>
       </div>
       <div className="right flex items-center space-x-4">
