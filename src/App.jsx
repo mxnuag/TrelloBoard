@@ -1,40 +1,53 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Main from './components/Main';
 import { BoardContext } from './context/BoardContext';
-
-
+import Preloader from './components/Preloader';
 
 function App() {
   const boardData = {
-    active:0,
-    boards:[
+    active: 0,
+    boards: [
       {
-        name:'My Trello Board',
-        bgcolor:'#069',
-        list:[
-          {id:"1",title:"To do",items:[{id:"cdrFt",title:"Project Description 1"}]},
-          {id:"2",title:"In Progress",items:[{id:"cdrFv",title:"Project Description 2"}]},
-          {id:"3",title:"Done",items:[{id:"cdrFb",title:"Project Description 3"}]}
+        name: 'My Trello Board',
+        bgcolor: '#069',
+        list: [
+          { id: "1", title: "To do", items: [{ id: "cdrFt", title: "Project Description 1" }] },
+          { id: "2", title: "In Progress", items: [{ id: "cdrFv", title: "Project Description 2" }] },
+          { id: "3", title: "Done", items: [{ id: "cdrFb", title: "Project Description 3" }] }
         ]
       }
     ]
-  }
-  const [allboard,setAllBoard] = useState(boardData); 
-  
+  };
+
+  const [allboard, setAllBoard] = useState(boardData);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Adjust the time to match your loading needs
+  }, []);
+
   return (
     <>
-    <Header></Header>
-    <BoardContext.Provider value={{allboard,setAllBoard}}>
-      <div className='content flex'>
-        <Sidebar></Sidebar>
-        <Main></Main>
-      </div>
-    </BoardContext.Provider>
+      {loading && <Preloader />}
+      {!loading && (
+        <>
+          <Header />
+          <BoardContext.Provider value={{ allboard, setAllBoard }}>
+            <div className='flex'>
+              <Sidebar />
+              <Main />
+            </div>
+          </BoardContext.Provider>
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
