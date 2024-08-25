@@ -1,6 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+// src/firebase.js
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,10 +16,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const analytics = getAnalytics(app);
 
-export { auth, provider, signInWithPopup, signOut };
+export { auth, provider };
