@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, provider } from './Firebase'; // Adjust the path if necessary
+import { toast } from 'react-toastify'; // Import toast functions
+import 'react-toastify/dist/ReactToastify.css'; // Import toast CSS
 
 const Header = () => {
   const [user, setUser] = useState(null);
@@ -16,10 +18,12 @@ const Header = () => {
       .then((result) => {
         // Successful login
         console.log('User signed in:', result.user);
+        toast.success(`Welcome, ${result.user.displayName}!`); // Show success toast
       })
       .catch((error) => {
         // Handle Errors here.
         console.error('Error signing in:', error);
+        toast.error('Error signing in. Please try again.'); // Show error toast
       });
   };
 
@@ -28,10 +32,12 @@ const Header = () => {
       .then(() => {
         // Sign-out successful.
         console.log('User signed out');
+        toast.success('You have been logged out.'); // Show success toast
       })
       .catch((error) => {
         // An error happened.
         console.error('Error signing out:', error);
+        toast.error('Error signing out. Please try again.'); // Show error toast
       });
   };
 
